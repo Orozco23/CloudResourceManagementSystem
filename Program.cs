@@ -20,6 +20,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Add interfaces
 builder.Services.AddScoped<IManagedDatabaseService, ManagedDatabaseService>();
 builder.Services.AddScoped<IVirtualMachineService, VirtualMachineService>();
+builder.Services.AddScoped<IMonthlyBillable, ManagedDatabaseService>();
+builder.Services.AddScoped<IMonthlyBillable, VirtualMachineService>();
 
 var app = builder.Build();
 
