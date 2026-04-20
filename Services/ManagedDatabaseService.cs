@@ -22,7 +22,7 @@ namespace CloudResourceManagementSystem.Services
                 ResourceName = dto.ResourceName,
                 Region = dto.Region,
                 BaseHourlyRate = dto.BaseHourlyRate,
-                Premium = dto.Premium.ToString().ToUpper() == "PREMIUM" ? true : false,
+                Premium = dto.name.ToUpper().Contains("PREMIUM") ? true : false,
                 name = dto.name,
                 DatabaseEngine = dto.DatabaseEngine,
                 StorageCapacityGb = dto.StorageCapacityGb

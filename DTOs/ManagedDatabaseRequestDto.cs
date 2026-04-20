@@ -12,7 +12,6 @@ namespace CloudResourceManagementSystem.DTOs
 
         [Range(0.01, double.MaxValue, ErrorMessage = "Base Hourly Rate must be greater than 0")]
         public decimal BaseHourlyRate { get; set; }
-        public string Premium { get; set; }
         [Required]
         public string name { get; set; }
         [Required]

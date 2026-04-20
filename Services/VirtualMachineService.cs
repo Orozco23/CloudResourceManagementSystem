@@ -2,6 +2,9 @@
 using CloudResourceManagementSystem.DTOs;
 using CloudResourceManagementSystem.Interfaces;
 using CloudResourceManagementSystem.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CloudResourceManagementSystem.Services
 {
@@ -21,7 +24,7 @@ namespace CloudResourceManagementSystem.Services
                 ResourceName = dto.ResourceName,
                 Region = dto.Region,
                 BaseHourlyRate = dto.BaseHourlyRate,
-                Premium = dto.Premium.ToString().ToUpper() == "PREMIUM" ? true : false,
+                Premium = dto.name.ToUpper().Contains("PREMIUM") ? true : false,
                 name = dto.name,
                 CpuCores = dto.CpuCores,
                 RamMemoryGb = dto.RamMemoryGb
@@ -29,6 +32,23 @@ namespace CloudResourceManagementSystem.Services
 
             _context.VirtualMachines.Add(vm);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<VirtualMachineResponseDto>> GetAll()
+        {
+            var vms = await _context.VirtualMachines.ToListAsync();
+
+            return vms.Select(vm => new VirtualMachineResponseDto
+            {
+                Id = vm.Id,
+                ResourceName = vm.ResourceName,
+                Region = vm.Region,
+                BaseHourlyRate = vm.BaseHourlyRate,
+                Premium = vm.Premium,
+                name = vm.name,
+                CpuCores = vm.CpuCores,
+                RamMemoryGb = vm.RamMemoryGb
+            }).ToList();
         }
     }
 }

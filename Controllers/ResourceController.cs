@@ -36,5 +36,12 @@ namespace CloudResourceManagementSystem.Controllers
             await _virtualMachineService.Create(dto);
             return Ok();
         }
+
+        [HttpGet("virtual-machines")]
+        public async Task<IActionResult> GetAllVirtualMachines()
+        {
+            var vms = await _virtualMachineService.GetAll();
+            return Ok(vms);
+        }
     }
 }
