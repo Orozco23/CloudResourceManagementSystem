@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CloudResourceManagementSystem.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CloudResourceManagementSystem.Data
 {
@@ -8,5 +9,9 @@ namespace CloudResourceManagementSystem.Data
         {
         }
 
+
+        public DbSet<ManagedDatabase> ManagedDatabases { get; set; }
+
+        public DbSet<VirtualMachine> VirtualMachines { get; set; }
     }
 }
