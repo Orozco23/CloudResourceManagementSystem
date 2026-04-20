@@ -1,4 +1,6 @@
 using CloudResourceManagementSystem.Data;
+using CloudResourceManagementSystem.Interfaces;
+using CloudResourceManagementSystem.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,11 @@ builder.Services.AddSwaggerGen();
 // Configure Entity Framework Core with SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=app.db"));
+
+
+// Add interfaces
+builder.Services.AddScoped<IManagedDatabaseService, ManagedDatabaseService>();
+builder.Services.AddScoped<IVirtualMachineService, VirtualMachineService>();
 
 var app = builder.Build();
 
