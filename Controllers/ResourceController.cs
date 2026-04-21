@@ -10,13 +10,13 @@ namespace CloudResourceManagementSystem.Controllers
     {
         private readonly IManagedDatabaseService _managedDatabaseService;
         private readonly IVirtualMachineService _virtualMachineService;
-        private readonly IMonthlyBillable _monthlyBillable;
+        private readonly IResourcesService _resourcesService;
 
-        public ResourceController(IManagedDatabaseService managedDatabaseService, IVirtualMachineService virtualMachineService, IMonthlyBillable monthlyBillable)
+        public ResourceController(IManagedDatabaseService managedDatabaseService, IVirtualMachineService virtualMachineService, IResourcesService resourcesService)
         {
             _managedDatabaseService = managedDatabaseService;
             _virtualMachineService = virtualMachineService;
-            _monthlyBillable = monthlyBillable;
+            _resourcesService = resourcesService;
         }
 
         [HttpPost("managed-databases")]
@@ -42,37 +42,16 @@ namespace CloudResourceManagementSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var virtualMachines = await _virtualMachineService.GetAll();
-            var managedDatabases = await _managedDatabaseService.GetAll();
-            List<ResourceResponseDto> result = new List<ResourceResponseDto>();
-            foreach (var virtualMachine in virtualMachines) {
-                result.Add(new ResourceResponseDto {
-                    Id = virtualMachine.Id,
-                    ResourceName = virtualMachine.ResourceName,
-                    Region = virtualMachine.Region,
-                    BaseHourlyRate = virtualMachine.BaseHourlyRate,
-                    Premium = virtualMachine.Premium,
-                    name = virtualMachine.name,
-                    CpuCores = virtualMachine.CpuCores,
-                    RamMemoryGb = virtualMachine.RamMemoryGb,
-                    MonthlyCost = _monthlyBillable.CalculateEstimatedMonthlyCost(730, virtualMachine.BaseHourlyRate, virtualMachine.Premium, virtualMachine.CpuCores, virtualMachine.Region)
-                });
-            }
-            foreach (var managedDatabase in managedDatabases)
-            {
-                result.Add(new ResourceResponseDto
-                {
-                    Id = managedDatabase.Id,
-                    ResourceName = managedDatabase.ResourceName,
-                    Region = managedDatabase.Region,
-                    BaseHourlyRate = managedDatabase.BaseHourlyRate,
-                    Premium = managedDatabase.Premium,
-                    name = managedDatabase.name,
-                    DatabaseEngine = managedDatabase.DatabaseEngine,
-                    StorageCapacityGb = managedDatabase.StorageCapacityGb,
-                    MonthlyCost = _monthlyBillable.CalculateEstimatedMonthlyCost(730, managedDatabase.BaseHourlyRate, managedDatabase.Premium, managedDatabase.StorageCapacityGb, managedDatabase.Region)
-                });
-            }
+            var result = await _resourcesService.GetAll();
+            return Ok(result);
+        }
+
+        [HttpGet("pagination")]
+        public async Task<IActionResult> GetAllPagination([FromQuery] int page = 1, [FromQuery] int limit = 5)
+        {
+            var offset = (page - 1) * limit; 
+            var result = await _resourcesService.GetAll();
+            result = result.Skip(offset).Take(limit).ToList();
             return Ok(result);
         }
 
