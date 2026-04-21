@@ -1,0 +1,6 @@
+@CloudResourceManagementSystem_HostAddress = http://localhost:5169
+
+GET {{CloudResourceManagementSystem_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
