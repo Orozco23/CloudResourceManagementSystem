@@ -2,8 +2,6 @@
 using CloudResourceManagementSystem.DTOs;
 using CloudResourceManagementSystem.Interfaces;
 using CloudResourceManagementSystem.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CloudResourceManagementSystem.Services

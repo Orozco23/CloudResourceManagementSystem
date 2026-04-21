@@ -1,6 +1,5 @@
 ﻿using CloudResourceManagementSystem.DTOs;
 using CloudResourceManagementSystem.Interfaces;
-using CloudResourceManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CloudResourceManagementSystem.Controllers
