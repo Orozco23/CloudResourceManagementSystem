@@ -55,6 +55,20 @@ namespace CloudResourceManagementSystem.Controllers
             return Ok(result);
         }
 
+        [HttpGet("sortBy")]
+        public async Task<IActionResult> GetAllSortBy([FromQuery] string sortBy = "name")
+        {
+            var result = await _resourcesService.Sort(sortBy);
+            return Ok(result);
+        }
+
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetAllFilter([FromQuery] string property = "name", [FromQuery] string input = "name")
+        {
+            var result = await _resourcesService.Filter(property, input);
+            return Ok(result);
+        }
+
         [HttpGet("virtual-machines")]
         public async Task<IActionResult> GetAllVirtualMachines()
         {
