@@ -108,7 +108,7 @@ Use an abstract superclass called CloudResource and two subclasses called Manage
   * **Method:** POST
   * **Note**
     * > Create virtual machine
-  * **route:** {host}/virtual-machines
+  * **route:** {host}api/resources/virtual-machines
   * **Request body:**
   
     ```json
@@ -121,8 +121,8 @@ Use an abstract superclass called CloudResource and two subclasses called Manage
       "ramMemoryGb": int
     }
 
-    * **Response**:
-      * **HTTP STATUS**: 200
+* **Response**:
+    * **HTTP STATUS**: 200
 <br>
 <br>
 <br>
@@ -133,7 +133,7 @@ Use an abstract superclass called CloudResource and two subclasses called Manage
   * **Method:** POST
   * **Note**
     * > Create managed database
-  * **route:** {host}/managed-databases
+  * **route:** {host}api/resources/managed-databases
   * **Request body:**
   
     ```json
@@ -146,8 +146,8 @@ Use an abstract superclass called CloudResource and two subclasses called Manage
       "storageCapacityGb": int
     }
 
-    * **Response**:
-      * **HTTP STATUS**: 200
+* * **Response**:
+    * **HTTP STATUS**: 200
 <br>
 <br>
 <br>
@@ -175,7 +175,92 @@ Use an abstract superclass called CloudResource and two subclasses called Manage
         "databaseEngine": "string",
         "storageCapacityGb": int,
         "monthlyCost": decimal
-      }
+      },
+      ...
+    ]
+<br>
+<br>
+<br>
+
+## **Get Resources with pagination**
+  * **Method:** GET
+  * **Note**
+    * > Returns list of resources with pagination.
+  * **Route:** {base_url}api/resources/pagination?page={page}&limit={limit}
+  * **Response body:**
+  
+  	```
+    [
+      {
+        "id": guid,
+        "resourceName": "string",
+        "region": "string",
+        "baseHourlyRate": decimal,
+        "premium": boolean,
+        "name": "string",
+        "cpuCores": int,
+        "ramMemoryGb": int,
+        "databaseEngine": "string",
+        "storageCapacityGb": int,
+        "monthlyCost": decimal
+      },
+      ...
+    ]
+<br>
+<br>
+<br>
+
+## **Get Resources with sort by**
+  * **Method:** GET
+  * **Note**
+    * > Returns list of resources with sorting.
+  * **Route:** {base_url}api/resources/sortBy?sortBy={property}
+  * **Response body:**
+  
+  	```
+    [
+      {
+        "id": guid,
+        "resourceName": "string",
+        "region": "string",
+        "baseHourlyRate": decimal,
+        "premium": boolean,
+        "name": "string",
+        "cpuCores": int,
+        "ramMemoryGb": int,
+        "databaseEngine": "string",
+        "storageCapacityGb": int,
+        "monthlyCost": decimal
+      },
+      ...
+    ]
+<br>
+<br>
+<br>
+
+## **Get Resources with filter**
+  * **Method:** GET
+  * **Note**
+    * > Returns list of resources with filtering.
+  * **Route:** {base_url}api/resources/filter?property={property}&input={input}
+  * **Response body:**
+  
+  	```
+    [
+      {
+        "id": guid,
+        "resourceName": "string",
+        "region": "string",
+        "baseHourlyRate": decimal,
+        "premium": boolean,
+        "name": "string",
+        "cpuCores": int,
+        "ramMemoryGb": int,
+        "databaseEngine": "string",
+        "storageCapacityGb": int,
+        "monthlyCost": decimal
+      },
+      ...
     ]
 <br>
 <br>

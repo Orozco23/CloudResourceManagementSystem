@@ -22,6 +22,7 @@ builder.Services.AddScoped<IManagedDatabaseService, ManagedDatabaseService>();
 builder.Services.AddScoped<IVirtualMachineService, VirtualMachineService>();
 builder.Services.AddScoped<IMonthlyBillable, ManagedDatabaseService>();
 builder.Services.AddScoped<IMonthlyBillable, VirtualMachineService>();
+builder.Services.AddScoped<IResourcesService, ResourceService>();
 
 var app = builder.Build();
 
