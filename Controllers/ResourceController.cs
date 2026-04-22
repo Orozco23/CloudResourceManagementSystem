@@ -47,7 +47,7 @@ namespace CloudResourceManagementSystem.Controllers
         }
 
         [HttpGet("pagination")]
-        public async Task<IActionResult> GetAllPagination([FromQuery] int page = 1, [FromQuery] int limit = 5)
+        public async Task<IActionResult> GetPagination([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {
             var offset = (page - 1) * limit; 
             var result = await _resourcesService.GetAll();
@@ -56,14 +56,14 @@ namespace CloudResourceManagementSystem.Controllers
         }
 
         [HttpGet("sortBy")]
-        public async Task<IActionResult> GetAllSortBy([FromQuery] string sortBy = "name")
+        public async Task<IActionResult> GetSortBy([FromQuery] string sortBy = "name")
         {
             var result = await _resourcesService.Sort(sortBy);
             return Ok(result);
         }
 
         [HttpGet("filter")]
-        public async Task<IActionResult> GetAllFilter([FromQuery] string property = "name", [FromQuery] string input = "name")
+        public async Task<IActionResult> GetFilter([FromQuery] string property = "name", [FromQuery] string input = "name")
         {
             var result = await _resourcesService.Filter(property, input);
             return Ok(result);
