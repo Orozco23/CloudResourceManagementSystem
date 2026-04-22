@@ -175,7 +175,8 @@ Use an abstract superclass called CloudResource and two subclasses called Manage
         "databaseEngine": "string",
         "storageCapacityGb": int,
         "monthlyCost": decimal
-      }
+      },
+      ...
     ]
 <br>
 <br>
@@ -202,7 +203,64 @@ Use an abstract superclass called CloudResource and two subclasses called Manage
         "databaseEngine": "string",
         "storageCapacityGb": int,
         "monthlyCost": decimal
-      }
+      },
+      ...
+    ]
+<br>
+<br>
+<br>
+
+## **Get Resources with sort by**
+  * **Method:** GET
+  * **Note**
+    * > Returns list of resources with sorting.
+  * **Route:** {base_url}api/resources/sortBy?sortBy={property}
+  * **Response body:**
+  
+  	```
+    [
+      {
+        "id": guid,
+        "resourceName": "string",
+        "region": "string",
+        "baseHourlyRate": decimal,
+        "premium": boolean,
+        "name": "string",
+        "cpuCores": int,
+        "ramMemoryGb": int,
+        "databaseEngine": "string",
+        "storageCapacityGb": int,
+        "monthlyCost": decimal
+      },
+      ...
+    ]
+<br>
+<br>
+<br>
+
+## **Get Resources with filter**
+  * **Method:** GET
+  * **Note**
+    * > Returns list of resources with filtering.
+  * **Route:** {base_url}api/resources/filter?property={property}&input={input}
+  * **Response body:**
+  
+  	```
+    [
+      {
+        "id": guid,
+        "resourceName": "string",
+        "region": "string",
+        "baseHourlyRate": decimal,
+        "premium": boolean,
+        "name": "string",
+        "cpuCores": int,
+        "ramMemoryGb": int,
+        "databaseEngine": "string",
+        "storageCapacityGb": int,
+        "monthlyCost": decimal
+      },
+      ...
     ]
 <br>
 <br>
